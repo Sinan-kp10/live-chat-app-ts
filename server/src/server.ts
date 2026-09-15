@@ -1,6 +1,10 @@
 import app from "./app"
 import http from "http"
 import { Server } from "socket.io";
+import chatSocket from "./socket/chatSocket";
+import connectDB from "./config/db";
+import dotenv from "dotenv";
+dotenv.config()
 
 const server = http.createServer(app)
 
@@ -10,14 +14,14 @@ const io = new Server(server, {
     }
 })
 
-io.on("connection", (socket)=>{
-    console.log("User connected:", socket.id)
+chatSocket(io)
 
-    socket.on("disconnect", ()=>{
-        console.log("User disconnected:", socket.id)
-    })
-})
+const startServer = async () => {
+  await connectDB();
 
-server.listen(5000, () => {
-  console.log("Server running on port 5000");
-});
+  server.listen(5000, () => {
+    console.log("Server running on port 5000");
+  });
+};
+
+startServer()

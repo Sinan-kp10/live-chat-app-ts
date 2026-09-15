@@ -1,14 +1,5 @@
-interface Message {
-    _id: string;
-    username: string;
-    message: string;
-    createdAt: string;
-}
+import type { MessageListProps } from "../type/chat";
 
-interface MessageListProps {
-    messages: Message[];
-    username: string;
-}
 
 function MessageList({ messages, username }: MessageListProps) {
     return (

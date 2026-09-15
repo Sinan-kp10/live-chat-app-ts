@@ -17,11 +17,11 @@ const io = new Server(server, {
 chatSocket(io)
 
 const startServer = async () => {
-  await connectDB();
+    await connectDB();
 
-  server.listen(5000, () => {
-    console.log("Server running on port 5000");
-  });
+    server.listen(5000, () => {
+        console.log("Server running on port 5000");
+    });
 };
 
 startServer()

@@ -63,25 +63,66 @@ function ChatPage({ username }: ChatPageProps) {
     }, [])
 
     return (
-        <div>
-        <h1>Live Chat</h1>
-        <p>🟢 {onlineUsers} people online</p>
+        <div className="chat-container">
+            <header className="chat-header">
+                <div className="chat-header-main">
+                    <div className="chat-header-title-group">
+                        <div className="chat-status-pulse"></div>
+                        <h1 className="chat-title">Live Chat</h1>
+                    </div>
+                    <p className="online-users">
+                        <span className="online-dot">🟢</span> {onlineUsers} {onlineUsers === 1 ? "person" : "people"} online
+                    </p>
+                </div>
+                <div className="chat-header-user">
+                    <span className="user-welcome">Welcome, <strong>{username}</strong> 👋</span>
+                </div>
+            </header>
 
-        <h3>Welcome, {username} 👋</h3>
+            <div className="chat-main">
+                <div className="chat-messages-column">
+                    <MessageList messages={messages} username={username} />
+                </div>
 
-        {notifications.map((notification) => (
-            <div key={notification.id}>
-                {notification.type === "joined" ? (
-                <p>🟢 {notification.username} joined the chat</p>
-                ) : (
-                <p>🔴 {notification.username} left the chat</p>
-                )}
+                <aside className="system-activity">
+                    <div className="system-activity-header">
+                        <h4 className="system-activity-title">System Activity</h4>
+                        <span className="system-activity-count">{notifications.length}</span>
+                    </div>
+                    <div className="system-messages-list">
+                        {notifications.length === 0 ? (
+                            <p className="no-activity">No recent activity</p>
+                        ) : (
+                            notifications.map((notification) => (
+                                <div
+                                    key={notification.id}
+                                    className={`system-message ${notification.type === "joined" ? "system-joined" : "system-left"}`}
+                                >
+                                    {notification.type === "joined" ? (
+                                        <p>
+                                            <span className="system-dot">🟢</span>
+                                            <span className="system-text">
+                                                <strong>{notification.username}</strong> joined the chat
+                                            </span>
+                                        </p>
+                                    ) : (
+                                        <p>
+                                            <span className="system-dot">🔴</span>
+                                            <span className="system-text">
+                                                <strong>{notification.username}</strong> left the chat
+                                            </span>
+                                        </p>
+                                    )}
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </aside>
             </div>
-        ))}
 
-        <MessageList messages={messages} username={username}/>
-
-        <MessageInput username={username} />
+            <footer className="chat-footer">
+                <MessageInput username={username} />
+            </footer>
         </div>
     );
 }

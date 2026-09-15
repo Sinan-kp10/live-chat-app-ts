@@ -24,16 +24,21 @@ function MessageInput({ username }: MessageInputProps) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-        <input
-            type="text"
-            placeholder="Type a message..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-        />
+        <div className="message-input">
+            <form className="message-form" onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    className="message-input-field"
+                    placeholder="Type a message..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                />
 
-        <button type="submit">Send</button>
-        </form>
+                <button type="submit" className="message-send-btn">
+                    <span>Send</span>
+                </button>
+            </form>
+        </div>
     );
 }
 

@@ -14,7 +14,7 @@ function NameModal ({onJoin} : NameModelProps){
         const trimmedName = name.trim()
 
         if(!trimmedName){
-            setError("Pleas Enter Your Name")
+            setError("Please enter your name")
             return
         }
         if (trimmedName.length < 3) {
@@ -31,6 +31,10 @@ function NameModal ({onJoin} : NameModelProps){
                     <div className="name-modal-icon">💬</div>
                     <h2 className="name-modal-title">Welcome to Live Chat</h2>
                     <p className="name-modal-subtitle">Enter your name or nickname to join the room</p>
+                    <div className="name-modal-ttl-badge">
+                        <span className="ttl-badge-icon">⏱️</span>
+                        <span>Messages automatically disappear after 24 hours</span>
+                    </div>
                 </div>
                 <form className="name-modal-form" onSubmit={handleSubmit}>
                     <div className="name-modal-input-group">

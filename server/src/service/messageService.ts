@@ -9,5 +9,11 @@ export const createMessage = async (username: string, message: string) => {
 };
 
 export const getMessages = async () => {
-    return await Message.find().sort({ createdAt: 1 });
+    const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000)
+
+    return await Message.find({
+        createdAt: {
+            $gte: twentyFourHoursAgo,
+        },
+    }).sort({createdAt: 1});
 };

@@ -4,7 +4,10 @@ import type { MessageListProps } from "../type/chat";
 function MessageList({ messages, username }: MessageListProps) {
     return (
         <div className="chat-messages">
-        {messages.map((msg) => (
+            <p className="chat-ttl-notice">
+                <span>⏱️ Messages are automatically removed after 24 hours</span>
+            </p>
+            {messages.map((msg) => (
             <div
                 key={msg._id}
                 className={`message ${msg.username === username ? "my-message" : "other-message"}`}
